@@ -36,7 +36,7 @@ export default function Rotas() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        <Tab.Screen name="Humoso" component={Humoso} options={{ headerShown: false }} />
+        
         <Tab.Screen name="Login" component={Login} options={{ headerShown: false }} />
         <Tab.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
         <Tab.Screen name="Serviços" component={Servicos} options={{ headerShown: false }} />
@@ -63,6 +63,7 @@ export default function Rotas() {
         <Tab.Screen name="SoloArgiloso" component={SoloArgiloso} options={{ headerShown: false }} />
         <Tab.Screen name="Argiloso" component={Argiloso} options={{ headerShown: false }} />
         <Tab.Screen name="SoloHumoso" component={SoloHumoso} options={{ headerShown: false }} />
+        <Tab.Screen name="Humoso" component={Humoso} options={{ headerShown: false }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
