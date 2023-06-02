@@ -23,15 +23,22 @@ import ClimaTropicalAltitude from './screens/ClimaTropicalAltitude';
 import TropicalAltitude from './screens/TropicalAltitude';
 import ClimaSemiarido from './screens/ClimaSemiarido';
 import Semiarido from './screens/Semiarido';
-
+import AlimentoSolo from './screens/AlimentoSolo';
+import Solos from './screens/Solos';
+import SoloArenoso from './screens/SoloArenoso';
+import Arenoso from './screens/Arenoso';
+import SoloArgiloso from './screens/SoloArgiloso';
+import Argiloso from './screens/Argiloso';
+import SoloHumoso from './screens/SoloHumoso';
+import Humoso from './screens/Humoso';
 
 export default function Rotas() {
   return (
     <NavigationContainer>
       <Tab.Navigator>
-        
-        <Tab.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
+        <Tab.Screen name="Humoso" component={Humoso} options={{ headerShown: false }} />
         <Tab.Screen name="Login" component={Login} options={{ headerShown: false }} />
+        <Tab.Screen name="Cadastrar" component={Cadastrar} options={{ headerShown: false }} />
         <Tab.Screen name="Serviços" component={Servicos} options={{ headerShown: false }} />
         <Tab.Screen name="DadosSolo" component={DadosSolo} options={{ headerShown: false }} />
         <Tab.Screen name="CadastroSolo" component={CadastroSolo} options={{ headerShown: false }} />
@@ -49,6 +56,13 @@ export default function Rotas() {
         <Tab.Screen name="TropicalAltitude" component={TropicalAltitude} options={{ headerShown: false }} />
         <Tab.Screen name="ClimaSemiarido" component={ClimaSemiarido} options={{ headerShown: false }} />
         <Tab.Screen name="Semiarido" component={Semiarido} options={{ headerShown: false }} />
+        <Tab.Screen name="AlimentoSolo" component={AlimentoSolo} options={{ headerShown: false }} />
+        <Tab.Screen name="Solos" component={Solos} options={{ headerShown: false }} />
+        <Tab.Screen name="SoloArenoso" component={SoloArenoso} options={{ headerShown: false }} />
+        <Tab.Screen name="Arenoso" component={Arenoso} options={{ headerShown: false }} />
+        <Tab.Screen name="SoloArgiloso" component={SoloArgiloso} options={{ headerShown: false }} />
+        <Tab.Screen name="Argiloso" component={Argiloso} options={{ headerShown: false }} />
+        <Tab.Screen name="SoloHumoso" component={SoloHumoso} options={{ headerShown: false }} />
       </Tab.Navigator>
     </NavigationContainer>
   );
