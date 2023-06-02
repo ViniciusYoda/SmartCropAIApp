@@ -9,8 +9,8 @@ export default function Servicos({navigation}) {
     navigation.navigate('DadosSolo')
   };
 
-  const handleDadosClima = () => {
-    // Lógica para navegar para a tela de Dados do Clima
+  function handleDadosClima() {
+    navigation.navigate('DadosClima')
   };
 
   return (
