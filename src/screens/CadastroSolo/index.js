@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import styles from './styles';
+import axios from 'axios';
 
 export default function CadastroSolo() {
   const [texturaSolo, setTexturaSolo] = useState('');
@@ -11,9 +12,26 @@ export default function CadastroSolo() {
   const [retencaoAgua, setRetencaoAgua] = useState('');
   const [condutEletrica, setCondutEletrica] = useState('');
 
-  const handleEnviar = () => {
-    // Lógica para enviar as informações do solo
-  };
+  function handleEnviar() {
+    try {
+      const response = axios.post('http://localhost:8080/api/solo', {
+        texturaDoSolo: texturaSolo,
+        phDoSolo: parseFloat(phSolo),
+        retencaoDeAgua: retencaoAgua,
+        condutEletrica: condutEletrica,
+      });
+
+      if (response.status === 201) {
+        Alert.alert('Sucesso', 'Cadastro do solo realizado com sucesso!');
+        setTexturaSolo('');
+        setPhSolo('');
+        setRetencaoAgua('');
+        setCondutEletrica('');
+      }
+    } catch (error) {
+      Alert.alert('Erro','Não foi possível cadastrar o solo. Verifique os campos e tente novamente.');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -24,19 +42,23 @@ export default function CadastroSolo() {
         </Text>
         <Input
           placeholder="- Textura do Solo -"
-          onChangeText={(text) => setTexturaSolo(text)}
+          value={texturaSolo}
+          onChangeText={setTexturaSolo}
         />
         <Input
           placeholder="- PH do Solo -"
-          onChangeText={(text) => setPhSolo(text)}
+          value={phSolo}
+          onChangeText={setPhSolo}
         />
         <Input
           placeholder="- Retenção de Água -"
-          onChangeText={(text) => setRetencaoAgua(text)}
+          value={retencaoAgua}
+          onChangeText={setRetencaoAgua}
         />
         <Input
           placeholder="- Condutividade Elétrica -"
-          onChangeText={(text) => setCondutEletrica(text)}
+          value={condutEletrica}
+          onChangeText={setCondutEletrica}
         />
         <Button title="ENVIAR" onPress={handleEnviar} />
       </View>

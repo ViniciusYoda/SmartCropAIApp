@@ -4,6 +4,7 @@ import Header from '../../components/Header';
 import Input from '../../components/Input';
 import Button from '../../components/Button';
 import styles from './styles';
+import axios from 'axios';
 
 export default function CadastroClima() {
   const [cep, setCep] = useState('');
@@ -12,9 +13,28 @@ export default function CadastroClima() {
   const [velDoVento, setVelDoVento] = useState('');
   const [pressaoAtmosferica, setPressaoAtmosferica] = useState('');
 
-  const handleEnviar = () => {
-    // Lógica para enviar as informações do solo
-  };
+  function handleEnviar() {
+    try {
+      const response = axios.post('http://localhost:8080/api/clima', {
+        cep,
+        precipitacao,
+        dirDoVento,
+        velDoVento,
+        pressaoAtmosferica,
+      });
+
+      if (response.status === 201) {
+        Alert.alert('Sucesso', 'Informações do clima enviadas com sucesso!');
+        setCep('');
+        setPrecipitacao('');
+        setDirDoVento('');
+        setVelDoVento('');
+        setPressaoAtmosferica('');
+      }
+    } catch (error) {
+      Alert.alert('Erro','Não foi possível enviar as informações do clima. Verifique os campos e tente novamente.');
+    }
+  }
 
   return (
     <View style={styles.container}>
@@ -23,25 +43,26 @@ export default function CadastroClima() {
         <Text style={styles.descriptionText}>
           Envie as informações de seu clima, para te auxiliar da melhor maneira.
         </Text>
-        <Input
-          placeholder="- CEP -"
-          onChangeText={(text) => setCep(text)}
-        />
+        <Input placeholder="- CEP -" value={cep} onChangeText={setCep} />
         <Input
           placeholder="- Precipitação -"
-          onChangeText={(text) => setPrecipitacao(text)}
+          value={precipitacao}
+          onChangeText={setPrecipitacao}
         />
         <Input
           placeholder="- Direção do Vento -"
-          onChangeText={(text) => setDirDoVento(text)}
+          value={dirDoVento}
+          onChangeText={setDirDoVento}
         />
         <Input
           placeholder="- Velocidade do Vento -"
-          onChangeText={(text) => setVelDoVento(text)}
+          value={velDoVento}
+          onChangeText={setVelDoVento}
         />
         <Input
           placeholder="- Pressão Atmosférica -"
-          onChangeText={(text) => setPressaoAtmosferica(text)}
+          value={pressaoAtmosferica}
+          onChangeText={setPressaoAtmosferica}
         />
         <Button title="ENVIAR" onPress={handleEnviar} />
       </View>

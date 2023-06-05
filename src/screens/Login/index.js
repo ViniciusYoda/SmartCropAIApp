@@ -6,18 +6,35 @@ import styles from './styles';
 
 import logoImage from '../../assets/logo.png';
 
-
-export default function Login({navigation}) {
+export default function Login({ navigation }) {
   const [login, setLogin] = useState('');
   const [senha, setSenha] = useState('');
 
-  const handleLogin = () => {
-    // Lógica para lidar com o login
-  };
-  
+  function handleLogin() {
+    try {
+      const response = axios.post('http://localhost:8080/api/login', {
+        email: login,
+        senha: senha,
+      });
+      console.log(response);
+
+      if (response.status === 200) {
+        Alert.alert('Sucesso', 'Login realizado com sucesso!');
+        setLogin('');
+        setSenha('');
+        navigation.navigate('Servicos');
+      }
+    } catch (error) {
+      Alert.alert(
+        'Erro',
+        'Não foi possível realizar o login. Verifique suas credenciais e tente novamente.'
+      );
+    }
+  }
+
   function handleCreateAccount() {
     navigation.navigate('Cadastrar');
-  };
+  }
 
   return (
     <View style={styles.container}>
@@ -25,20 +42,20 @@ export default function Login({navigation}) {
         <Image source={logoImage} style={styles.logo} />
       </View>
       <View style={styles.inputContainer}>
-        <Input
-          placeholder="Login"
-          onChangeText={(text) => setLogin(text)}
-        />
+        <Input placeholder="Email" value={login} onChangeText={setLogin} />
         <Input
           placeholder="Senha"
           secureTextEntry={true}
-          onChangeText={(text) => setSenha(text)}
+          value={senha}
+          onChangeText={setSenha}
         />
       </View>
-      <TouchableOpacity style={styles.createAccountText} onPress={handleCreateAccount}>
+      <TouchableOpacity
+        style={styles.createAccountText}
+        onPress={handleCreateAccount}>
         <Text>Já possui conta? Criar conta</Text>
       </TouchableOpacity>
-    
+
       <Button title="LOGIN" onPress={handleLogin} />
     </View>
   );
