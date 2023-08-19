@@ -6,15 +6,15 @@ import Button from '../../components/Button';
 import styles from './styles';
 import axios from 'axios';
 
-export default function Cadastrar() {
+export default function Cadastrar({ navigation }) {
   const [nome, setNome] = useState('');
   const [cpf, setCpf] = useState('');
   const [email, setEmail] = useState('');
   const [senha, setSenha] = useState('');
 
-  function handleCadastro() {
+  async function handleCadastro() {
     try {
-      const response = axios.post('http://localhost:8080/api/cadastrar', {
+      const response = await axios.post('http://localhost:8080/api/cadastrar', {
         nome,
         cpf,
         email,
@@ -28,6 +28,7 @@ export default function Cadastrar() {
         setCpf('')
         setEmail('');
         setSenha('')
+        navigation.replace('Login')
       }
     } catch (error) {
       Alert.alert('Erro', 'Não foi possível cadastrar o usuário. Verifique os dados e tente novamente.');
